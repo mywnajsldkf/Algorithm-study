@@ -441,7 +441,94 @@ def gcd(m,n):
 
 
 
+## 이진탐색
+
+- 시간 복잡도: O(logN) [보충설명](https://jwoop.tistory.com/9)
+
+- 반드시 오름차순으로 **정렬된 상태**에서 시작하며, 정렬된 자료를 반으로 나누어 탐색한다.
+
+- 현재의 중앙값과 찾는 값을 비교한다.
+  - 중앙값 > 찾는 값: 중앙 값 기준으로 왼쪽(작은 부분) 탐색
+  - 중앙값 < 찾는 값: 중앙 값 기준으로 오른쪽(큰 부분) 탐색
 
 
 
+### 탐색 프로세스
+
+- left를 0으로 초기화, right를 검색하는 리스트(배열)의 마지막 원소의 인덱스로 초기화한다.
+  - right를 검색하는 리스트(배열)의 마지막 원소의 인덱스 -> 리스트(배열)의 크기-1
+- mid 변수를 (left+right)/2로 설정하여 계속해서 탐색한다.
+- left > right가 되는 순간까지 탐색 한다.
+  - 그전에 해당 값을 찾으면 탐색이 종료된다.
+
+
+
+> 예제 1~8에서 7찾기
+
+1. 배열을 생성한다.
+   - left = 배열의 시작, array[0]
+   - right = 배열의 마지막, array[7] (=len(array))
+
+<img src="image/이진탐색1.jpeg" alt="이진탐색1" style="zoom:50%;" />
+
+2. mid를 찾는다.
+
+   - mid = (left + right)/2
+
+   <img src="image/이진탐색2.jpeg" alt="이진탐색2" style="zoom:50%;" />
+
+3. mid값(4) < 찾는 값(7) 이다. left를 mid + 1로 이동시킨다. mid는 이동시킨 left와 right사이의 값이 된다.
+
+   <img src="image/이진탐색3.jpeg" alt="이진탐색3" style="zoom:50%;" />
+
+4. mid값(6) < 찾는 값(7)이다. 다시 위의 과정을 수행하였을 때 mid=(left+right)/2의 값을 넣어준다. array[6]=7으로 값을 찾았기 때문에 탐색을 종료한다.
+
+   <img src="image/이진탐색4.jpeg" alt="이진탐색4" style="zoom:50%;" />
+
+### 구현
+
+> binary search
+
+```python
+# target : 찾는 값
+# data : target이 들어있는 배열
+def binary_search(target, data):
+  data.sort()
+  left = 0
+  right = len(data) - 1 
+  
+  while left <= right:
+    mid = (left+right) // 2
+    
+    if data[mid] == target:
+      return mid						# 값을 찾음
+   	elif data[mid] < target:
+      left = mid + 1
+    elif data[mid] > target:
+      right = mid - 1
+    
+    return None
+```
+
+
+
+> 재귀적 구현
+
+```python
+def binary_search_recursion(target, left, right, data):
+  if left > right:
+    return None
+  
+  mid = (left+right)//2
+  
+  if data[mid] == target:
+    return mid
+  elif data[mid] > target:
+    right = mid -1
+   elif data[mid] < target:
+    left = mid + 1 
+   
+  return binary_search_recursion(target, left, right, data)
+  
+```
 
