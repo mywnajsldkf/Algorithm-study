@@ -3,7 +3,7 @@
 ### 목차
 
 - [python](#python)
-- [Algorithm](#Algorithm)
+- [Algorithm](#algorithm)
 
 
 
@@ -19,4 +19,4 @@
 # Algorithm
 
 - [유클리드 호제법](algorithm/유클리드-호제법.md)
-- [이진탐색](algoritm/이진탐색.md)
+- [이진탐색](algorithm/이진탐색.md)
