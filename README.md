@@ -20,3 +20,4 @@
 
 - [유클리드 호제법](algorithm/유클리드호제법.md)
 - [이진탐색](algorithm/이진탐색.md)
+- [정렬](algorithm/sort.md)
