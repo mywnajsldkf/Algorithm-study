@@ -15,7 +15,7 @@ public class Main {
     static int[] dy = {0, 1, 0, -1};
     static int MAX = 0;
     static int answer = 1;
-    static Queue<Point> queue;
+    static int count;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,11 +29,12 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
                 int height = Integer.parseInt(st.nextToken());
+                MAX = Math.max(height, MAX);
                 map[i][j] = height;
             }
         }
 
-        for (int h = 1; h <= 99; h++) {
+        for (int h = 1; h < MAX; h++) {
             answer = Math.max(answer, solve(h));
         }
 
@@ -42,8 +43,7 @@ public class Main {
     }
 
     private static int solve(int h) {
-        int count = 0;
-
+        count = 0;
         visited = new boolean[N][N];
 
         for (int i = 0; i < N; i++) {
@@ -51,36 +51,28 @@ public class Main {
                 // 방문하지 않았고, 높이가 지정된 것보다 높다면
                 if (!visited[i][j] && map[i][j] > h) {
                     count++;
-                    BFS(i, j, h);
+                    DFS(i, j, h);
                 }
             }
         }
         return count;
     }
 
-    private static void BFS(int y, int x, int h) {
-        queue = new LinkedList<>();
-        queue.add(new Point(x, y));
-        visited[y][x] = true;       // 방문 표시
+    private static void DFS(int y, int x, int h) {
+        visited[y][x] = true;
 
-        while (!queue.isEmpty()) {
-            Point now_point = queue.poll();
+        for (int i = 0; i < 4; i++) {
+            int now_y = y + dy[i];
+            int now_x = x + dx[i];
 
-            for (int i = 0; i < 4; i++) {
-                int now_y = now_point.y + dy[i];
-                int now_x = now_point.x + dx[i];
-
-                // 범위 밖에 있거나 방문한 지점이라면!
-                if (now_x < 0 || now_x > N - 1 || now_y < 0 || now_y > N - 1) {
-                    continue;
-                }
-                if (visited[now_y][now_x]) {
-                    continue;
-                }
-                if (map[now_y][now_x] > h) {
-                    queue.add(new Point(now_x, now_y));
-                    visited[now_y][now_x] = true;
-                }
+            if (now_x < 0 || now_x > N - 1 || now_y < 0 || now_y > N - 1) {
+                continue;
+            }
+            if (visited[now_y][now_x]) {
+                continue;
+            }
+            if (map[now_y][now_x] > h) {
+                DFS(now_y, now_x, h);
             }
         }
     }
