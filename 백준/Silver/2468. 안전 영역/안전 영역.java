@@ -29,12 +29,11 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
                 int height = Integer.parseInt(st.nextToken());
-                MAX = Math.max(height, MAX);
                 map[i][j] = height;
             }
         }
 
-        for (int h = 1; h <= MAX; h++) {
+        for (int h = 1; h <= 99; h++) {
             answer = Math.max(answer, solve(h));
         }
 
