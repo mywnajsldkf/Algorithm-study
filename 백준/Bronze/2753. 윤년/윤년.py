@@ -1,16 +1,10 @@
-year = int(input())
+from sys import stdin as s
 
+year = int(s.readline())
 
-def find_leapyear(year):
-    result = 0
-
-    if(year % 4 == 0):
-        if(year % 100 != 0 or year % 400 == 0):
-            result = 1
-        else:
-            result = 0
-
-    return result
-
-
-print(find_leapyear(year))
+if(year % 400 == 0):
+    print(1)
+elif(year % 4 == 0 and year % 100 != 0):
+    print(1)
+else:
+    print(0)
