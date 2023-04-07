@@ -1,4 +1,2 @@
-def solve(a):
-    ans = 0
-    ans = sum(a)
-    return ans
+def solve(a: list):
+    return sum(a)
