@@ -1,13 +1,14 @@
-try_number = int(input())
+from sys import stdin as s
 
-for i in range(try_number):
-    str_list = list(map(str, input()))
-    repeat_number = int(str_list.pop(0))
-    str_list.pop(0)
+T = int(s.readline())
 
-    result_str = []
+for i in range(T):
+    R, S = s.readline().split()
 
-    for i in range(len(str_list)):
-        result_str.append(str_list[i]*repeat_number)
+    P = ""
+    S = list(S)
 
-    print(''.join(result_str))
+    for j in S:
+        P += j*int(R)
+
+    print(P)
