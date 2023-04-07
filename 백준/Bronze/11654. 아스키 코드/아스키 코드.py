@@ -1,3 +1,3 @@
-some = input()
-result = ord(some)
-print(result)
+import sys
+A = sys.stdin.readline()
+print(ord(list(A)[0]))
