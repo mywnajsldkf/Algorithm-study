@@ -1,17 +1,13 @@
-test = int(input())
+T = int(input())
 
-def calScore(case):
-    score = 0
-    # right = True
-    nowScore = 0
-    for i in range(len(case)):
-        if case[i] == 'O':
-            nowScore += 1
-            score += nowScore
-        elif case[i] == 'X':
-            nowScore = 0
-    print(score)
-
-for i in range(test):
-    case = input()
-    calScore(case)
+for i in range(T):
+    quiz = list(input())
+    count = 0
+    reward = 0
+    for i in quiz:
+        if i == 'O':
+            reward +=1
+            count+= reward
+        elif i == 'X':
+            reward = 0
+    print(count)
