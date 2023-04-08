@@ -1,12 +1,12 @@
-a = int(input())
+from sys import stdin as s
 
-nums = []
-for i in range(a):
-    nums.append(input())
+N = int(s.readline())
 
-b = list(map(int,nums))
+numbers = []
+for i in range(N):
+    numbers.append(int(s.readline()))
 
-b.sort()
+numbers.sort()
 
-for i in b:
+for i in numbers:
     print(i)
