@@ -1,21 +1,28 @@
-from sys import stdin, stdout
-n = stdin.readline()
-N = sorted(map(int,stdin.readline().split()))
-m = stdin.readline()
-M = map(int, stdin.readline().split())
+from sys import stdin as s
 
-def binary(l, N, start, end):
-    if start > end:
-        return 0
-    m = (start+end)//2
-    if l == N[m]:
-        return 1
-    elif l < N[m]:
-        return binary(l, N, start, m-1)
-    else:
-        return binary(l, N, m+1, end)
+N = int(s.readline())
+N_Array = list(map(int, s.readline().split()))
+M = int(s.readline())
+M_Array = list(map(int, s.readline().split()))
 
-for l in M:
-    start = 0
-    end = len(N)-1
-    print(binary(l,N,start,end))
+def findNumber(array, key):
+    left = 0
+    right = N-1
+
+    while True:
+        middle = (left + right) // 2
+        if array[middle] == key:
+            return 1
+        elif array[middle] < key:
+            left = middle + 1
+        else:
+            right = middle -1
+        if left > right:
+            break
+    return 0
+
+N_Array.sort()
+
+for key in M_Array:
+    print(findNumber(N_Array, key))
+
