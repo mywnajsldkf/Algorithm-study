@@ -1,11 +1,20 @@
+from sys import stdin as s
 from collections import deque
 
-N = int(input())
-deque = deque([i for i in range(1, N+1)])
+N = int(s.readline())
 
-while(len(deque) >1):
-    deque.popleft()
-    move_num = deque.popleft()
-    deque.append(move_num)
+a = []
+queue = deque(a)
+
+for i in range(N):
+    queue.append(i+1)
+
+'''
+while(len(queue) > 1):
     
-print(deque[0])
+'''
+while len(queue) > 1:
+    queue.popleft()
+    queue.append(queue.popleft())
+
+print(queue.pop())
