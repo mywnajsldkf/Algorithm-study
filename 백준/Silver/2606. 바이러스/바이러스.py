@@ -1,6 +1,7 @@
 from sys import stdin as s
 import sys
 from collections import deque
+sys.setrecursionlimit(10**6)
 
 n = int(s.readline())
 m = int(s.readline())
@@ -14,21 +15,15 @@ for i in range(m):
 
 visited = [False for i in range(n+1)]
 
-
-def bfs(start):
-    count = 0
-    queue = deque([start])
-
+count = 0
+def dfs(start):
+    global count
+    count += 1
     visited[start] = True
 
-    while len(queue) != 0:
-        now = queue.popleft()
-        for i in computer[now]:
-            if not visited[i]:
-                queue.append(i)
-                visited[i] = True
-                count += 1
+    for i in computer[start]:
+        if not visited[i]:
+            dfs(i)
 
-    return count
-
-print(bfs(1))
+dfs(1)
+print(count-1)
