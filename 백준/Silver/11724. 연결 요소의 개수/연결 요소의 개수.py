@@ -1,6 +1,9 @@
 from sys import stdin as s
 from collections import deque
 
+import sys
+sys.setrecursionlimit(10**6)
+
 N, M = map(int, s.readline().split())
 
 connection = [[] for _ in range(N+1)]
@@ -12,21 +15,17 @@ for i in range(M):
 
 visited = [False for i in range(N+1)]
 
-def bfs(start):
-    queue = deque([start])
-    visited[start] = True
+def dfs(start):
 
-    while len(queue) != 0:
-        now = queue.popleft()
-        for i in connection[now]:
-            if not visited[i]:
-                queue.append(i)
-                visited[i] = True
+    for i in connection[start]:
+        if not visited[i]:
+            visited[i] = True
+            dfs(i)
 
 count = 0
 for i in range(1, N+1):
     if not visited[i]:
         count += 1
-        bfs(i)
+        dfs(i)
 
 print(count)
