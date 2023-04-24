@@ -17,13 +17,10 @@ for i in range(N - 1):
 result = [0] * (N - 1)
 visited = [False] * (N + 1)
 
-for i in range(N+1):
-    tree[i].sort()
-
 def dfs(start):
+    visited[start] = True
     for i in tree[start]:
         if not visited[i]:
-            visited[i] = True
             result[i - 2] = start
             dfs(i)
 
