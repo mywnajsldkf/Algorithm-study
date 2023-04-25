@@ -33,7 +33,6 @@ for _i in range(H):
 
 while len(queue) != 0:
     now = queue.popleft()
-    visited[now[0]][now[1]][now[2]] = True
     for i in range(6):
         new_z = now[0] + dz[i]
         new_y = now[1] + dy[i]
@@ -47,7 +46,8 @@ while len(queue) != 0:
         if not visited[new_z][new_y][new_x] and tomato[new_z][new_y][new_x] == 0:
             queue.append([new_z, new_y, new_x])
             tomato[new_z][new_y][new_x] = tomato[now[0]][now[1]][now[2]] + 1
-
+            visited[new_z][new_y][new_x] = True
+            
 for _i in range(H):
     for _j in range(N):
         for _k in range(M):
