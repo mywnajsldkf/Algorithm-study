@@ -1,21 +1,20 @@
-import sys
-sys.setrecursionlimit(10**6)
 from sys import stdin as s
 from collections import deque
 
 K = int(s.readline())
 
-
-def dfs(start, group):
+def bfs(start, group):
+    queue = deque([start])
     visited[start] = group
 
-    for i in graph[start]:
-        if not visited[i]:
-            a = dfs(i, -group)
-            if not a:
+    while len(queue) != 0:
+        now = queue.popleft()
+        for i in graph[now]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = -1 * visited[now]
+            elif visited[i] == visited[now]:
                 return False
-        elif visited[i] == visited[start]:  # 현재와 연결된 정점의 그룹값이 같다면 -> 충돌난 것이니 False
-            return False
     return True
 
 
@@ -31,8 +30,8 @@ for t in range(K):
 
     for i in range(1, V+1):
         if not visited[i]:
-            result = dfs(i, 1)
-            if not result:      # False가 나왔다면 break
+            result = bfs(i, 1)
+            if not result:
                 break
 
     print("YES" if result else "NO")
