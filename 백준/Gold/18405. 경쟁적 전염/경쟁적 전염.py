@@ -28,21 +28,23 @@ for i in range(n):
 tmp.sort()
 q = deque()
 
-for num, now_y, now_x in tmp:
-    q.append([now_y, now_x, num])
+def bfs():
+    global ss
+    for num, now_y, now_x in tmp:
+        q.append([now_y, now_x, num])
 
-while len(q) != 0 and ss != 0:
-    size = len(q)
-    ss -= 1  # 바이러스 초를 줄인다.
-    for p in range(size):
-        now_y, now_x, num = q.popleft()
-        for i in range(4):
-            ny, nx = now_y + dy[i], now_x + dx[i]
-            if 0 > ny or ny >= n or 0 > nx or nx >= n:
-                continue
-            if visited[ny][nx]:
-                continue
-            visited[ny][nx] = num
-            q.append([ny, nx, num])
-
+    while len(q) != 0 and ss != 0:
+        size = len(q)
+        ss -= 1  # 바이러스 초를 줄인다.
+        for p in range(size):
+            now_y, now_x, num = q.popleft()
+            for i in range(4):
+                ny, nx = now_y + dy[i], now_x + dx[i]
+                if 0 > ny or ny >= n or 0 > nx or nx >= n:
+                    continue
+                if visited[ny][nx]:
+                    continue
+                visited[ny][nx] = num
+                q.append([ny, nx, num])
+bfs()
 print(visited[y - 1][x - 1])
