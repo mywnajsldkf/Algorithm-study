@@ -7,36 +7,13 @@ coin = []
 for i in range(n):
     coin.append(int(s.readline()))
 
+ans = 0
 count = 0
-
-
-def findNearest(k):
-    left = 0
-    right = len(coin) - 1
-
-    # 이진탐색으로 찾음
-    while left <= right:
-        middle = (left + right) // 2
-
-        if k == coin[middle]:
-            return coin[middle]
-        elif k < coin[middle]:
-            right = middle - 1
-        elif k > coin[middle]:
-            left = middle + 1
-
-    # 이진탐색으로 못 찾음
-    if right <= -1:
-        return coin[0]
-    elif left >= len(coin):
-        return coin[len(coin) - 1]
-    else:
-        return coin[right]
-
-
+a = len(coin) - 1
 while k != 0:
-    div = findNearest(k)
-    count += k // div
-    k = int(k % div)
+    for i in range(a, -1, -1):
+        if k - coin[i] >= 0:
+            count += k // coin[i]
+            k = int(k % coin[i])
 
 print(count)
