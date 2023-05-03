@@ -11,7 +11,4 @@ result = drink[-1]
 for i in range(n-1):
     result += drink[i] / 2
 
-if result % 1 != 0:
-    print(result)
-else:
-    print(int(result))
+print(result)
