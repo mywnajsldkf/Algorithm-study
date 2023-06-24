@@ -13,8 +13,9 @@ dz = [-1, 1, 0, 0, 0, 0]
 dy = [0, 0, -1, 1, 0, 0]
 dx = [0, 0, 0, 0, -1, 1]
 
-def bfs():
+max_count = -sys.maxsize
 
+def bfs():
     while queue:
         z, y, x = queue.popleft()
 
@@ -32,7 +33,17 @@ def bfs():
                 arr[new_z][new_y][new_x] = arr[z][y][x] + 1
                 visited[new_z][new_y][new_x] = True
 
+def makeResult():
+    global max_count
+    for i in arr:
+        for j in i:
+            max_count = max(max_count, max(j))
+            for k in j:
+                if k == 0:
+                    print(-1)
+                    sys.exit()
 
+                
 for _i in range(H):
     for _j in range(N):
         for _k in range(M):
@@ -42,15 +53,5 @@ for _i in range(H):
 
 bfs()
 
-max_count = -sys.maxsize
-
-for i in arr:
-    for j in i:
-        max_count = max(max_count, max(j))
-        for k in j:
-            if k == 0:
-                print(-1)
-                sys.exit()
-
-
+makeResult()
 print(max_count - 1)
