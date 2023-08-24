@@ -6,9 +6,9 @@ import java.util.StringTokenizer;
 
 public class Main {
     static int N, M;
-    static String S;
-    static String P ="";
-    static int count = 0;
+    static char S[];
+    static int count;
+    static int result;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,26 +16,24 @@ public class Main {
 
         N = Integer.parseInt(br.readLine());
         M = Integer.parseInt(br.readLine());
-        S = br.readLine();
+        S = br.readLine().toCharArray();
 
-        for (int i = 0; i < N; i++) {
-            P += "IO";
-        }
-        P += "I";
+        count = 0;
+        result = 0;
 
-        for (int i = 0; i <= M - P.length(); i++) {
-            String temp = "";
-            for (int j = i; j < i + P.length(); j++) {
-                temp += S.charAt(j);
-                if (S.charAt(j) != P.charAt(j - i)) {
-                    break;
+        for (int i = 1; i < M - 1; i++) {
+            if (S[i - 1] == 'I' && S[i] == 'O' && S[i + 1] == 'I') {
+                count++;
+                if (count == N) {
+                    count -= 1;
+                    result++;
                 }
-            }
-            if (temp.equals(P)) {
-                count += 1;
+                i++;
+            } else {
+                count = 0;
             }
         }
-        sb.append(count);
+        sb.append(result);
         System.out.println(sb);
     }
 }
