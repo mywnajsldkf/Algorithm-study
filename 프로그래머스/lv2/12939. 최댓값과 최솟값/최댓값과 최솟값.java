@@ -1,19 +1,20 @@
 import java.util.*;
+
 class Solution {
     public String solution(String s) {
-        String answer = "";
+        String[] str = s.split(" ");
+        List<Integer> numbers = new ArrayList<>();
         
-        String[] s_numbers = s.split(" ");
-        int[] numbers = new int[s_numbers.length];
-        
-        for(int i = 0; i < numbers.length; i++) {
-            numbers[i] = Integer.parseInt(s_numbers[i]);
+        for(int i = 0; i < str.length; i++) {
+            numbers.add(Integer.parseInt(str[i]));
         }
-        Arrays.sort(numbers);
         
-        answer+=numbers[0];
-        answer+= " ";
-        answer+= numbers[numbers.length - 1];
+        Collections.sort(numbers);
+        
+        String answer = "";
+        answer += numbers.get(0);
+        answer += " ";
+        answer += numbers.get(numbers.size()-1);
         
         return answer;
     }
