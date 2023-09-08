@@ -6,13 +6,16 @@ class Solution
     {
         int answer = 0;
         
-        Arrays.sort(A);
-        Arrays.sort(B);
+        Integer[] newA = Arrays.stream(A).boxed().toArray(Integer[]::new);
+        Integer[] newB = Arrays.stream(B).boxed().toArray(Integer[]::new);
         
-        for(int i = 0; i < A.length; i++){
-            answer += (A[i] * B[B.length-i-1]);
+        Arrays.sort(newA);
+        Arrays.sort(newB);
+        
+        for(int i = 0; i < newA.length; i++) {
+            answer += newA[i] * newB[newA.length-1-i];
         }
-
+        
         return answer;
     }
 }
