@@ -1,22 +1,19 @@
-import java.util.*;
-
 class Solution {
     public int solution(int n) {
-        int answer = n;
-        List<Integer> numbers = new ArrayList<>();
+        int answer = 0;
         
-        while(answer >= 3){
-            numbers.add(answer % 3);
-            answer /= 3;
+        // 3진법으로
+        StringBuilder sb = new StringBuilder();
+        while (n > 0) {
+            sb.append(String.valueOf(n % 3));
+            n /= 3;
         }
-        numbers.add(answer);
         
-        answer = 0;
-        
-        // 3, 2, 1
-        for(int i = numbers.size() -1; i >= 0; i--){
-            answer += numbers.get(i) * Math.pow(3,(numbers.size()-1-i));
-            
+        String str = sb.toString();
+        char[] charArray = str.toCharArray();
+
+        for(int i = 0; i < str.length(); i++) {
+            answer += Integer.parseInt(String.valueOf(charArray[str.length()-1-i])) * Math.pow(3, i);
         }
         
         return answer;
