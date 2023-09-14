@@ -10,7 +10,6 @@ public class Main {
     static int[] numbers;
     static boolean[] visited;
     static StringBuilder sb;
-    static Set<String> answer = new LinkedHashSet<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,22 +33,16 @@ public class Main {
         Arrays.sort(numbers);
         dfs(0);
 
-        Object[] arr = answer.toArray();
-
-        for (int i = 0; i < arr.length; i++) {
-            sb.append(arr[i]).append("\n");
-        }
         System.out.println(sb);
     }
 
     static void dfs(int depth) {
+        int before = 0;
         if (depth == M) {
-            String ans = "";
             for (int i = 0; i < M; i++) {
-                ans += String.valueOf(arr[i]);
-                ans += " ";
+                sb.append(arr[i] + " ");
             }
-            answer.add(ans);
+            sb.append("\n");
             return;
         }
 
@@ -57,8 +50,15 @@ public class Main {
             if (visited[i]) {
                 continue;
             }
+            int now = numbers[i];
+
+            if (now == before) {
+                continue;
+            }
+
             visited[i] = true;
-            arr[depth] = numbers[i];
+            arr[depth] = now;
+            before = now;
             dfs(depth + 1);
             visited[i] = false;
         }
