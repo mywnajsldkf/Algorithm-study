@@ -1,25 +1,22 @@
+import java.util.*;
+
 class Solution {
-    public int[] solution(int brown, int yellow) {
-        int[] answer = new int[2];
-        int sum = brown + yellow;
+    public Integer[] solution(int brown, int yellow) {
+        Integer[] answer = new Integer[2];
+        answer[0] = 1;
+        answer[1] = 2;
         
-        for(int y = 3; y < sum; y++) {
-            int x = sum / y;
-            if(sum % y == 0 && x >= 3) {
-                int yy = y;
-                int yx = x;
-                int center = (yy-2)*(yx-2);
+        int yy, yx, by, bx = 0;
+        
+        for(yy = 1; yy < yellow / 2; yy++) {
+            if(yellow % yy == 0) {
+                yx = yellow / yy;
                 
-                if(center == yellow) {
-                    int col = Math.max(yy, yx);
-                    int row = Math.min(yy, yx);
-                    answer[0] = col;
-                    answer[1] = row;
-                    return answer;
-                }
+                System.out.println("yy: " + yy + " / yx: " + yx);
             }
         }
         
+        Arrays.sort(answer, Collections.reverseOrder());
         return answer;
     }
 }
